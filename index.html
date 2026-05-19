@@ -350,7 +350,7 @@
           We reply within one business day. Solo-developer-run; please be patient on weekends.
         </p>
       </div>
-      <form class="contact-form" onsubmit="event.preventDefault(); alert('Replace with your form handler (Formspree, Cloudflare Pages Forms, etc.)');">
+      <form class="contact-form" method="POST" action="/submit">
         <label>Name<input type="text" name="name" required /></label>
         <label>Email<input type="email" name="email" required /></label>
         <label>What kind of project?<select name="kind">

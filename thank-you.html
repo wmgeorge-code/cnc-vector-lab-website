@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Message received — CNC Vector Lab</title>
+  <link rel="icon" type="image/png" href="assets/cnc-logo.png" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .thankyou-wrap {
+      min-height: 80vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      gap: 1.25rem;
+      padding: 4rem 1.5rem;
+    }
+    .thankyou-icon { font-size: 3rem; line-height: 1; }
+    .thankyou-wrap h1 { font-size: 2rem; margin: 0; }
+    .thankyou-wrap p  { color: var(--text-muted); max-width: 36ch; margin: 0; }
+  </style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap topbar-inner">
+    <a href="/" class="brand">
+      <img src="assets/cnc-logo.png" alt="" class="brand-logo" />
+      <strong>CNC Vector Lab</strong>
+    </a>
+    <nav class="nav">
+      <a href="/#how">How it works</a>
+      <a href="/#features">Features</a>
+      <a href="/#pricing">Pricing</a>
+      <a href="/#faq">FAQ</a>
+      <a href="/#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="thankyou-wrap">
+    <div class="thankyou-icon">✉️</div>
+    <h1>Message received.</h1>
+    <p>Thanks for reaching out. We reply within one business day — check your spam folder if you don't hear back.</p>
+    <a href="/" class="cta-button">← Back to home</a>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <div>
+      <img src="assets/cnc-logo.png" alt="" class="brand-logo small" />
+      <strong>CNC Vector Lab</strong>
+    </div>
+    <p class="footer-legal">
+      &copy; <span id="year"></span> CNC Vector Lab.
+      <a href="#">Privacy</a> · <a href="#">Terms</a> · <a href="#">EULA</a>
+    </p>
+  </div>
+</footer>
+
+<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>
