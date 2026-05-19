@@ -2,12 +2,21 @@
  * Cloudflare Pages Function — contact form handler
  * Route: POST /submit
  *
- * Required env vars (set in CF Pages → Settings → Environment Variables):
- *   RESEND_API_KEY   — from resend.com (free tier: 3 000 emails/month)
- *   FROM_EMAIL       — verified sender, e.g. contact@cncvectorlab.com
- *                      (domain must be verified in Resend dashboard)
- *   TO_EMAIL         — where submissions land, e.g. bill@cncvectorlab.com
+ * Uses Cloudflare's native send_email binding — no API key needed.
+ *
+ * One-time setup in Cloudflare Pages dashboard:
+ *   Pages → your project → Settings → Functions → Email bindings
+ *   Binding name : EMAIL
+ *   Destination  : bill@cncvectorlab.com
+ *
+ * The FROM address must be on a domain you have verified in
+ * Cloudflare Email Routing (e.g. contact@cncvectorlab.com).
  */
+
+import { EmailMessage } from "cloudflare:email";
+
+const FROM = "contact@cncvectorlab.com";
+const TO   = "bill@cncvectorlab.com";
 
 export async function onRequestPost(context) {
   const { request, env } = context;
@@ -33,51 +42,41 @@ export async function onRequestPost(context) {
     return badRequest("Invalid email address.");
   }
 
-  /* ── Send via Resend ─────────────────────────────────────────────── */
-  const apiKey   = env.RESEND_API_KEY;
-  const fromAddr = env.FROM_EMAIL || "contact@cncvectorlab.com";
-  const toAddr   = env.TO_EMAIL   || "bill@cncvectorlab.com";
+  /* ── Build raw MIME message ──────────────────────────────────────── */
+  const subject = `[Contact] ${kind} — ${name}`;
+  const body    = [
+    `Name:         ${name}`,
+    `Email:        ${email}`,
+    `Project type: ${kind}`,
+    ``,
+    message,
+  ].join("\r\n");
 
-  if (apiKey) {
-    const body = JSON.stringify({
-      from:     `CNC Vector Lab <${fromAddr}>`,
-      to:       [toAddr],
-      reply_to: email,
-      subject:  `[Contact] ${kind} — ${name}`,
-      text: [
-        `Name:         ${name}`,
-        `Email:        ${email}`,
-        `Project type: ${kind}`,
-        ``,
-        message,
-      ].join("\n"),
-    });
+  const raw = [
+    `MIME-Version: 1.0`,
+    `From: CNC Vector Lab <${FROM}>`,
+    `To: ${TO}`,
+    `Reply-To: ${name} <${email}>`,
+    `Subject: ${subject}`,
+    `Content-Type: text/plain; charset=utf-8`,
+    ``,
+    body,
+  ].join("\r\n");
 
-    const res = await fetch("https://api.resend.com/emails", {
-      method:  "POST",
-      headers: {
-        "Authorization": `Bearer ${apiKey}`,
-        "Content-Type":  "application/json",
-      },
-      body,
-    });
-
-    if (!res.ok) {
-      const err = await res.text();
-      console.error("Resend error:", res.status, err);
-      // Still redirect so the user doesn't see an error — check logs if missing mail
-    }
-  } else {
-    // RESEND_API_KEY not yet configured — log and continue
-    console.warn("RESEND_API_KEY not set. Submission not emailed.", { name, email, kind });
+  /* ── Send via Cloudflare Email binding ───────────────────────────── */
+  try {
+    const msg = new EmailMessage(FROM, TO, new Response(raw).body);
+    await env.EMAIL.send(msg);
+  } catch (err) {
+    console.error("Email send failed:", err);
+    // Still redirect — don't show raw errors to the submitter
   }
 
   /* ── Redirect to thank-you page ──────────────────────────────────── */
-  const origin  = new URL(request.url).origin;
+  const origin = new URL(request.url).origin;
   return Response.redirect(`${origin}/thank-you.html`, 303);
 }
 
-/* ── Helpers ─────────────────────────────────────────────────────────── */
 function badRequest(msg) {
   return new Response(msg, {
     status: 400,
