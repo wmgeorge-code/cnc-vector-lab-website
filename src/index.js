@@ -6,7 +6,7 @@
 import { EmailMessage } from "cloudflare:email";
 
 const FROM = "contact@cncvectorlab.com";
-const TO   = "contact@cncvectorlab.com";
+const TO   = "bill@wildwoodcarving.com";
 
 export default {
   async fetch(request, env) {
