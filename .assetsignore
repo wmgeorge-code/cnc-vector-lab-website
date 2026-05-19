@@ -1,0 +1,8 @@
+src/
+functions/
+node_modules/
+.github/
+.wrangler/
+wrangler.jsonc
+.gitignore
+.assetsignore
