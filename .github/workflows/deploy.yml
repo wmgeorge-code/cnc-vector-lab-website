@@ -18,7 +18,7 @@ jobs:
         uses: cloudflare/pages-action@v1
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: f39dbcd4130fd731be7f0f77bf013e01
+          accountId: c41b1c0f178eeb820bc18232e8c3351e
           projectName: cnc-vector-lab-website
           directory: .
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
