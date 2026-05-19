@@ -1,4 +1,4 @@
-name: Deploy to Cloudflare Pages
+name: Deploy to Cloudflare
 
 on:
   push:
@@ -10,16 +10,12 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      deployments: write
 
     steps:
       - uses: actions/checkout@v4
 
-      - name: Deploy to Cloudflare Pages
-        uses: cloudflare/pages-action@v1
+      - name: Deploy with Wrangler
+        uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: c41b1c0f178eeb820bc18232e8c3351e
-          projectName: cnc-vector-lab-website
-          directory: .
-          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
