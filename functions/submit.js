@@ -16,7 +16,7 @@
 import { EmailMessage } from "cloudflare:email";
 
 const FROM = "contact@cncvectorlab.com";
-const TO   = "bill@cncvectorlab.com";
+const TO   = "contact@cncvectorlab.com";
 
 export async function onRequestPost(context) {
   const { request, env } = context;
