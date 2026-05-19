@@ -1,0 +1,398 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CNC Vector Lab — Photo to inlay-ready DXF in 10 minutes</title>
+  <meta name="description" content="Local-first raster-to-CAM tool for CNC, laser, wood inlay, resin inlay, and v-carve. Per-layer DXF export, 3D preview, no cloud, no subscription." />
+  <meta property="og:title" content="CNC Vector Lab" />
+  <meta property="og:description" content="The vectorizer that knows what 'inlay-ready' means. Local-first. $79 perpetual, no subscription." />
+  <meta property="og:image" content="assets/06a-assign.png" />
+  <link rel="icon" type="image/png" href="assets/cnc-logo.png" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap topbar-inner">
+    <a href="#top" class="brand">
+      <img src="assets/cnc-logo.png" alt="" class="brand-logo" />
+      <strong>CNC Vector Lab</strong>
+    </a>
+    <nav class="nav">
+      <a href="#how">How it works</a>
+      <a href="#tour">Workspace tour</a>
+      <a href="#features">Features</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a href="#pricing" class="cta-button">Get it — $79</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ============= HERO ============= -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <span class="eyebrow">Desktop · macOS &amp; Windows · v0.1</span>
+        <h1>Photo to inlay-ready DXF<br/>in 10 minutes.</h1>
+        <p class="lede">
+          A local-first raster-to-CAM tool built for wood inlay, resin inlay, v-carve, and laser workflows. Per-layer DXF export with stable layer naming, manufacturing-grade handoff, 3D preview. Drop in to <strong>VCarve, Fusion, Aspire</strong> &mdash; no fighting Inkscape's Trace Bitmap.
+        </p>
+        <div class="hero-ctas">
+          <a href="#pricing" class="cta-button big">Buy &mdash; $79 once</a>
+          <a href="#download" class="cta-button big secondary">Download free version</a>
+        </div>
+        <ul class="hero-trust">
+          <li>✓ Runs locally &mdash; no upload</li>
+          <li>✓ No subscription</li>
+          <li>✓ 14-day full trial</li>
+        </ul>
+      </div>
+      <div class="hero-visual">
+        <img src="assets/06a-assign.png" alt="CNC Vector Lab — Vector Lab workspace with assigned palette layers" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= PROBLEM / POSITIONING ============= -->
+  <section class="band band-dark">
+    <div class="wrap">
+      <h2 class="section-title">The vectorizer that knows what <em>inlay-ready</em> means.</h2>
+      <div class="three-col">
+        <div class="col">
+          <h3>Stop fighting Inkscape</h3>
+          <p>Trace Bitmap was built for clean line art, not photos. CNC Vector Lab uses bilateral smoothing, palette segmentation, and per-layer cleanup so you don't spend an hour deleting noise islands by hand.</p>
+        </div>
+        <div class="col">
+          <h3>Stop hand-naming DXFs</h3>
+          <p>One DXF per species, named the way VCarve expects them: <code>{Project} - {Layer}.dxf</code>. Re-trace and the names carry forward. Walnut layer stays walnut.</p>
+        </div>
+        <div class="col">
+          <h3>Stop guessing male inset</h3>
+          <p>Wood-inlay projects ship both female (pocket) and male (insert) DXFs, offset by your fit clearance via polygon-offset math. Warnings when features are too small to survive the inset.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= HOW IT WORKS ============= -->
+  <section id="how" class="band">
+    <div class="wrap">
+      <h2 class="section-title">How it works</h2>
+      <p class="section-sub">Four steps. Most projects ship in under 15 minutes.</p>
+
+      <ol class="how-steps">
+        <li>
+          <div class="how-text">
+            <span class="step-num">1</span>
+            <h3>Trace</h3>
+            <p>Drop a PNG. Pick palette segmentation or B/W. Tune cleanup. The engine produces per-layer vector islands you can actually use.</p>
+          </div>
+          <img src="assets/04b-tracing.png" alt="Tracing a source image into per-layer vector regions" />
+        </li>
+
+        <li class="reverse">
+          <div class="how-text">
+            <span class="step-num">2</span>
+            <h3>Inspect &amp; assign</h3>
+            <p>Marquee-select stray islands, merge or delete them, assign each layer to a real material (Walnut, Maple, Cherry Red pigment, V-bit pass). Cut-risk warnings flag anything smaller than your bit.</p>
+          </div>
+          <img src="assets/05a-inspector.png" alt="Inspector workspace with marquee selection and per-layer material assignment" />
+        </li>
+
+        <li>
+          <div class="how-text">
+            <span class="step-num">3</span>
+            <h3>Mockup &amp; 3D preview</h3>
+            <p>See the assembled inlay on a real substrate — walnut, maple, end-grain checker, juice groove. Rotate the 3D preview before cutting.</p>
+          </div>
+          <img src="assets/07a-mockup.png" alt="Project Mockup workspace showing the inlay on a wood substrate" />
+        </li>
+
+        <li class="reverse">
+          <div class="how-text">
+            <span class="step-num">4</span>
+            <h3>Export &amp; handoff</h3>
+            <p>One click ships a zip with per-layer DXFs, fab report, project config, and machine spec. Drop straight into VCarve / Fusion / Aspire. G-code stays with your CAM tool of choice.</p>
+          </div>
+          <img src="assets/08b-preflight.png" alt="Pre-flight modal before exporting the handoff zip" />
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ============= WORKSPACE TOUR ============= -->
+  <section id="tour" class="band band-dark">
+    <div class="wrap">
+      <h2 class="section-title">Five workspaces, one project.</h2>
+      <p class="section-sub">No mode-switching. Project state persists across the whole pipeline.</p>
+
+      <div class="tour-grid">
+        <figure>
+          <img src="assets/04a-trace-card.png" alt="Vector Lab workspace" />
+          <figcaption><strong>Vector Lab</strong> &mdash; trace, cleanup, palette segmentation, inspector.</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/07b-mockup-juice-groove.png" alt="Project Mockup workspace" />
+          <figcaption><strong>Mockup</strong> &mdash; substrate composite with grain, end-grain checker, juice groove preview.</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/08a-manufacturing.png" alt="CNC Manufacturing workspace" />
+          <figcaption><strong>Manufacturing</strong> &mdash; per-layer bit picker, sanity panel, pre-flight checks.</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/02b-project-popover.png" alt="Project popover" />
+          <figcaption><strong>Project shell</strong> &mdash; multi-project recall, machine library, palette pin.</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/05b-magnify.png" alt="Magnify inspector" />
+          <figcaption><strong>Magnify</strong> &mdash; press Z for a 3&times; zoom panel anchored to the inspector.</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/01-welcome.png" alt="Welcome modal" />
+          <figcaption><strong>Multi-project</strong> &mdash; New / Open / Recent with auto-save. No more "everyone is current".</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= FEATURES ============= -->
+  <section id="features" class="band">
+    <div class="wrap">
+      <h2 class="section-title">What ships in v0.1</h2>
+      <div class="features-grid">
+        <div class="feat">
+          <h3>🎯 Per-layer DXF export</h3>
+          <p>LWPOLYLINE in board units. Layer names like <code>{Project} - {Walnut}</code>. <code>$INSUNITS</code> set per project. Round-trips cleanly through VCarve and Fusion 360.</p>
+        </div>
+        <div class="feat">
+          <h3>🪵 Wood inlay: male + female</h3>
+          <p>Both pocket and insert DXFs per layer, offset by your fit clearance via <code>pyclipper</code> polygon-offset. Warnings when features won't survive the inset.</p>
+        </div>
+        <div class="feat">
+          <h3>🎨 Material libraries</h3>
+          <p>Wood species, vendor resin palettes (Just Resin, Black Diamond), v-carve materials. ΔE76 color matching. Edit your own lumber rack.</p>
+        </div>
+        <div class="feat">
+          <h3>🧊 3D Preview workspace</h3>
+          <p>Rotate the assembled inlay before cutting. Solid / Color / Depth view modes. Vendored Three.js, no CDN, no tracking.</p>
+        </div>
+        <div class="feat">
+          <h3>🛡️ Pre-flight sanity panel</h3>
+          <p>Board larger than table? Bit spindle exceeds machine max? Layer assigned to a missing bit? Caught before the export, not at the machine.</p>
+        </div>
+        <div class="feat">
+          <h3>📦 Manufacturing handoff zip</h3>
+          <p>One bundle: per-layer DXFs, fabrication report (Markdown), reproduce script, project config, machine spec. Drop it in your shop folder and walk to the CNC.</p>
+        </div>
+        <div class="feat">
+          <h3>💾 Local-first storage</h3>
+          <p>Projects live in <code>~/Library/Application Support/CNC Vector Lab</code>. No upload, no account, no cloud sync. Air-gap friendly.</p>
+        </div>
+        <div class="feat">
+          <h3>🎛️ Project &amp; machine pairing</h3>
+          <p>Pair every project with a machine record (table size, spindle range, bit library, units). Sanity checks read both sides.</p>
+        </div>
+        <div class="feat">
+          <h3>⌘K command palette</h3>
+          <p>Every action discoverable from one fuzzy search. Inline help (<kbd>?</kbd>) with 24 topics. Keyboard-driven by design.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= PRICING ============= -->
+  <section id="pricing" class="band band-dark">
+    <div class="wrap">
+      <h2 class="section-title">One-time price. No subscription. Ever.</h2>
+      <p class="section-sub">$79 perpetual. Pair it with the perpetual VCarve license you already own. No Adobe tax.</p>
+
+      <div class="pricing-grid">
+        <div class="price-card">
+          <h3>Free</h3>
+          <div class="price-tag">$0</div>
+          <p class="price-sub">Forever. Word of mouth is real.</p>
+          <ul class="price-features">
+            <li>✓ Full tracing engine</li>
+            <li>✓ Palette &amp; B/W modes</li>
+            <li>✓ Inspector + cleanup</li>
+            <li>✓ Mockup workspace</li>
+            <li>✓ Assigned SVG export</li>
+            <li>✓ Custom material libraries</li>
+            <li class="dim">— No per-layer DXF</li>
+            <li class="dim">— No handoff zip</li>
+            <li class="dim">— No 3D preview</li>
+          </ul>
+          <a href="#download" class="cta-button block">Download</a>
+        </div>
+
+        <div class="price-card featured">
+          <span class="badge">Recommended</span>
+          <h3>CNC Vector Lab</h3>
+          <div class="price-tag">$79</div>
+          <p class="price-sub">Perpetual. 12 months of updates. Install on every machine you own.</p>
+          <ul class="price-features">
+            <li>✓ Everything in Free</li>
+            <li>✓ Per-layer DXF export</li>
+            <li>✓ Male + female (wood inlay)</li>
+            <li>✓ Manufacturing handoff zip</li>
+            <li>✓ 3D Preview workspace</li>
+            <li>✓ Fab report (Markdown)</li>
+            <li>✓ Pre-flight sanity checks</li>
+            <li>✓ 14-day full trial</li>
+            <li>✓ Email support</li>
+          </ul>
+          <a href="#buy" class="cta-button block">Buy — $79</a>
+        </div>
+
+        <div class="price-card">
+          <h3>Lifetime updates</h3>
+          <div class="price-tag">$149</div>
+          <p class="price-sub">All future versions, no renewal. For long-term backers.</p>
+          <ul class="price-features">
+            <li>✓ Everything in CNC Vector Lab</li>
+            <li>✓ All future updates, forever</li>
+            <li>✓ Priority email support</li>
+            <li>✓ Early-access builds</li>
+          </ul>
+          <a href="#buy" class="cta-button block secondary">Buy — $149</a>
+        </div>
+      </div>
+
+      <p class="pricing-fineprint">
+        After year 1, paid updates are <strong>$29/year</strong> (optional &mdash; skipping keeps the version you have working forever). Refunds within 30 days, no questions.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============= DEMO ART ============= -->
+  <section class="band band-dark band-muted">
+    <div class="wrap demo-art">
+      <div>
+        <h2 class="section-title left">Built on real test cuts.</h2>
+        <p>Every release is validated against real artwork — the Eagle inlay shown here was the canonical test case across Phases 1 through 4. We don't ship features that haven't survived a scrap-board test.</p>
+      </div>
+      <img src="assets/Eagle.png" alt="Eagle artwork used as the canonical test case" />
+    </div>
+  </section>
+
+  <!-- ============= FAQ ============= -->
+  <section id="faq" class="band">
+    <div class="wrap">
+      <h2 class="section-title">FAQ</h2>
+      <div class="faq-grid">
+        <details>
+          <summary>Does this replace VCarve / Fusion / Aspire?</summary>
+          <p>No &mdash; it feeds them. CNC Vector Lab stops at DXF. Your CAM tool of choice generates G-code from those DXFs. G-code is machine- and post-processor-specific; we keep that with your tool, which already does it well.</p>
+        </details>
+        <details>
+          <summary>Will it run offline?</summary>
+          <p>Yes. The app is desktop-only. Once installed, no network connection is required for tracing, inspection, mockup, 3D preview, or export. License verification is one-time + offline-signed.</p>
+        </details>
+        <details>
+          <summary>What about my artwork — is it uploaded anywhere?</summary>
+          <p>Never. Source images, projects, and exports all stay on your machine. There is no cloud sync, no telemetry, no account required.</p>
+        </details>
+        <details>
+          <summary>Which CNCs is it tested against?</summary>
+          <p>Bundled machine presets ship for Shapeoko 3 / 4 XL, X-Carve Pro, Onefinity Journeyman, LongMill MK2, and a generic profile. The output is plain DXF, so any machine with a CAM tool that imports DXF works.</p>
+        </details>
+        <details>
+          <summary>Can I use it for laser cutting / engraving?</summary>
+          <p>Yes. Per-layer SVG and DXF export feed LightBurn, xTool Creative Space, and similar laser CAM tools. Pigment/resin material libraries make multi-pass laser inlay straightforward.</p>
+        </details>
+        <details>
+          <summary>What if I need a refund?</summary>
+          <p>30 days, no questions. Email and we'll process it.</p>
+        </details>
+        <details>
+          <summary>Mac and Windows?</summary>
+          <p>Both. Unsigned builds for v0.1 (one-paragraph "first launch on Mac" doc included). Signed builds in v0.2+.</p>
+        </details>
+        <details>
+          <summary>How does the 14-day trial work?</summary>
+          <p>Email us for a trial code. Paste it in Settings &rarr; License. Full paid features unlock for 14 days. After expiry the free tier keeps working &mdash; the paid features quietly grey out. No hard-stop, no upgrade nag.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= DOWNLOAD ============= -->
+  <section id="download" class="band band-accent">
+    <div class="wrap text-center">
+      <h2 class="section-title">Download</h2>
+      <p class="section-sub">v0.1 builds for macOS and Windows. Free tier works out of the box.</p>
+      <div class="download-buttons">
+        <a href="#" class="cta-button big">macOS .dmg</a>
+        <a href="#" class="cta-button big">Windows installer</a>
+        <a href="https://github.com/" class="cta-button big secondary">View source on GitHub</a>
+      </div>
+      <p class="download-note">First launch on Mac: right-click the app → Open. Gatekeeper warning is expected for unsigned v0.1 builds.</p>
+    </div>
+  </section>
+
+  <!-- ============= CONTACT ============= -->
+  <section id="contact" class="band">
+    <div class="wrap contact-grid">
+      <div>
+        <h2 class="section-title left">Get in touch.</h2>
+        <p>Questions about a specific project type? Need a trial code? Found a bug? Want to feature CNC Vector Lab in your YouTube workflow video?</p>
+        <p class="contact-detail">
+          <strong>Email:</strong> <a href="mailto:hello@cncvectorlab.com">hello@cncvectorlab.com</a><br/>
+          <strong>Support:</strong> <a href="mailto:support@cncvectorlab.com">support@cncvectorlab.com</a><br/>
+          <strong>Press &amp; partnerships:</strong> <a href="mailto:hello@cncvectorlab.com">hello@cncvectorlab.com</a>
+        </p>
+        <p class="contact-detail">
+          We reply within one business day. Solo-developer-run; please be patient on weekends.
+        </p>
+      </div>
+      <form class="contact-form" onsubmit="event.preventDefault(); alert('Replace with your form handler (Formspree, Cloudflare Pages Forms, etc.)');">
+        <label>Name<input type="text" name="name" required /></label>
+        <label>Email<input type="email" name="email" required /></label>
+        <label>What kind of project?<select name="kind">
+          <option>Wood inlay</option>
+          <option>Resin inlay</option>
+          <option>V-carve</option>
+          <option>Laser</option>
+          <option>Trial code request</option>
+          <option>Other</option>
+        </select></label>
+        <label>Message<textarea name="message" rows="4" required></textarea></label>
+        <button type="submit" class="cta-button">Send</button>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <div>
+      <img src="assets/cnc-logo.png" alt="" class="brand-logo small" />
+      <strong>CNC Vector Lab</strong>
+      <p class="footer-tagline">Local-first raster-to-CAM for makers.</p>
+    </div>
+    <nav class="footer-nav">
+      <a href="#how">How it works</a>
+      <a href="#features">Features</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <p class="footer-legal">
+      &copy; <span id="year"></span> CNC Vector Lab.
+      <a href="#">Privacy</a> · <a href="#">Terms</a> · <a href="#">EULA</a>
+    </p>
+  </div>
+</footer>
+
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
