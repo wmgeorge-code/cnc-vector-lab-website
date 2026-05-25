@@ -30,10 +30,12 @@ async function handleSubmit(request, env) {
     return badRequest("Could not parse form data.");
   }
 
-  const name    = (formData.get("name")    || "").trim();
-  const email   = (formData.get("email")   || "").trim();
-  const kind    = (formData.get("kind")    || "Other").trim();
-  const message = (formData.get("message") || "").trim();
+  const name     = (formData.get("name")     || "").trim();
+  const email    = (formData.get("email")    || "").trim();
+  const kind     = (formData.get("kind")     || "Other").trim();
+  const message  = (formData.get("message")  || "").trim();
+  const platforms = formData.getAll("platform").filter(Boolean);
+  const platform  = platforms.length ? platforms.join(", ") : "Not specified";
 
   /* ── Basic validation ────────────────────────────────────────────── */
   if (!name || !email || !message) {
@@ -49,6 +51,7 @@ async function handleSubmit(request, env) {
     `Name:         ${name}`,
     `Email:        ${email}`,
     `Project type: ${kind}`,
+    `Platform:     ${platform}`,
     ``,
     message,
   ].join("\r\n");

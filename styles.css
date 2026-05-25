@@ -710,6 +710,34 @@ h1 {
 
 .contact-form button { align-self: flex-start; margin-top: 4px; }
 
+.platform-fieldset {
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: .5rem .75rem .65rem;
+  display: flex;
+  gap: 1.5rem;
+}
+.platform-fieldset legend {
+  font-size: .75rem;
+  color: var(--text-muted);
+  padding: 0 .25rem;
+}
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+  font-size: .95rem;
+  cursor: pointer;
+  flex-direction: row;
+  margin: 0;
+}
+.checkbox-label input[type="checkbox"] {
+  width: 1rem;
+  height: 1rem;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
 @media (max-width: 800px) {
   .contact-grid { grid-template-columns: 1fr; gap: 36px; }
 }

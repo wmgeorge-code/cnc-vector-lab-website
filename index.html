@@ -327,8 +327,8 @@
       <h2 class="section-title">Download</h2>
       <p class="section-sub">v0.1 builds for macOS and Windows. 14-day trial available &mdash; fill out the contact form to get your download link.</p>
       <div class="download-buttons">
-        <a href="#contact" class="cta-button big">Request macOS trial</a>
-        <a href="#contact" class="cta-button big">Request Windows trial</a>
+        <a href="#contact" class="cta-button big" onclick="selectPlatform('macos')">Request macOS trial</a>
+        <a href="#contact" class="cta-button big" onclick="selectPlatform('windows')">Request Windows trial</a>
       </div>
       <p class="download-note">Fill out the contact form and select "Trial code request" — we'll send you the download link and your trial key. First launch on Mac: right-click the app → Open.</p>
     </div>
@@ -360,6 +360,11 @@
           <option>Trial code request</option>
           <option>Other</option>
         </select></label>
+        <fieldset class="platform-fieldset">
+          <legend>Platform</legend>
+          <label class="checkbox-label"><input type="checkbox" name="platform" value="macOS" id="chk-macos" /> macOS</label>
+          <label class="checkbox-label"><input type="checkbox" name="platform" value="Windows" id="chk-windows" /> Windows</label>
+        </fieldset>
         <label>Message<textarea name="message" rows="4" required></textarea></label>
         <button type="submit" class="cta-button">Send</button>
       </form>
@@ -391,6 +396,13 @@
 
 <script>
 document.getElementById('year').textContent = new Date().getFullYear();
+
+function selectPlatform(platform) {
+  const macos   = document.getElementById('chk-macos');
+  const windows = document.getElementById('chk-windows');
+  if (platform === 'macos')   { macos.checked = true;  windows.checked = false; }
+  if (platform === 'windows') { windows.checked = true; macos.checked = false;  }
+}
 </script>
 
 </body>
