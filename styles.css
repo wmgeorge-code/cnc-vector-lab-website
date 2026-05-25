@@ -665,6 +665,81 @@ h1 {
   font-size: 15px;
 }
 
+/* ── Masterclasses ─────────────────────────────────────────────────── */
+.masterclass-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-top: 2.5rem;
+}
+.masterclass-card {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.masterclass-img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.masterclass-body {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  flex: 1;
+}
+.masterclass-tag {
+  display: inline-block;
+  font-size: .7rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: rgba(244,168,90,.12);
+  border: 1px solid rgba(244,168,90,.25);
+  border-radius: 4px;
+  padding: .2rem .55rem;
+  width: fit-content;
+}
+.masterclass-card h3 {
+  font-size: 1.25rem;
+  color: var(--text);
+  margin: 0;
+}
+.masterclass-card > .masterclass-body > p {
+  color: var(--text-muted);
+  font-size: .95rem;
+  margin: 0;
+}
+.masterclass-days {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: .75rem;
+  flex: 1;
+}
+.masterclass-days li {
+  font-size: .88rem;
+  color: var(--text-muted);
+  padding-left: 1.1rem;
+  border-left: 2px solid var(--accent);
+  line-height: 1.5;
+}
+.masterclass-days li strong {
+  color: var(--text);
+  display: block;
+  margin-bottom: .15rem;
+}
+@media (max-width: 800px) {
+  .masterclass-grid { grid-template-columns: 1fr; }
+}
+
 .contact-detail strong { color: var(--text); display: inline-block; min-width: 130px; }
 
 .contact-form {
