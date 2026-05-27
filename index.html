@@ -232,8 +232,9 @@
             <span class="masterclass-tag">Resin &amp; Wood Inlay</span>
             <h3>From Sketch to Flawless Pour</h3>
           </div>
-          <div class="slideshow-stage">
+          <div class="slideshow-stage" onclick="openModal('pour')" title="Click to enlarge">
             <img id="pour-img" src="assets/masterclass/pour/slide-01.png" alt="From Sketch to Flawless Pour — slide 1 of 13" class="slideshow-img" />
+            <span class="enlarge-hint">⤢ Click to enlarge</span>
           </div>
           <div class="slideshow-controls">
             <button class="slide-btn" onclick="moveSlide('pour',-1)" aria-label="Previous slide">&#8592;</button>
@@ -248,8 +249,9 @@
             <span class="masterclass-tag">Laser Cutting &amp; Engraving</span>
             <h3>End the Nightmare of Node Cleanup</h3>
           </div>
-          <div class="slideshow-stage">
+          <div class="slideshow-stage" onclick="openModal('laser')" title="Click to enlarge">
             <img id="laser-img" src="assets/masterclass/laser/slide-01.png" alt="Mastering Flawless Laser Vectors — slide 1 of 7" class="slideshow-img" />
+            <span class="enlarge-hint">⤢ Click to enlarge</span>
           </div>
           <div class="slideshow-controls">
             <button class="slide-btn" onclick="moveSlide('laser',-1)" aria-label="Previous slide">&#8592;</button>
@@ -428,6 +430,23 @@
     </div>
   </section>
 
+  <!-- ── Slide modal ───────────────────────────────────────────────── -->
+  <div id="slide-modal" class="slide-modal" role="dialog" aria-modal="true" aria-label="Slide viewer" hidden>
+    <div class="slide-modal-backdrop" onclick="closeModal()"></div>
+    <div class="slide-modal-inner">
+      <button class="slide-modal-close" onclick="closeModal()" aria-label="Close">&times;</button>
+      <div class="slide-modal-title" id="modal-title"></div>
+      <div class="slide-modal-stage">
+        <button class="slide-modal-nav prev" onclick="modalMove(-1)" aria-label="Previous slide">&#8592;</button>
+        <img id="modal-img" class="slide-modal-img" src="" alt="" />
+        <button class="slide-modal-nav next" onclick="modalMove(1)" aria-label="Next slide">&#8594;</button>
+      </div>
+      <div class="slide-modal-footer">
+        <span id="modal-counter"></span>
+      </div>
+    </div>
+  </div>
+
 </main>
 
 <footer class="footer">
@@ -457,22 +476,59 @@ document.getElementById('year').textContent = new Date().getFullYear();
 
 // ── Slideshow ──────────────────────────────────────────────────────────
 const DECKS = {
-  pour:  { total: 13, current: 1, path: 'assets/masterclass/pour/slide-{n}.png' },
-  laser: { total:  7, current: 1, path: 'assets/masterclass/laser/slide-{n}.png' },
+  pour:  { total: 13, current: 1, path: 'assets/masterclass/pour/slide-{n}.png',  label: 'From Sketch to Flawless Pour' },
+  laser: { total:  7, current: 1, path: 'assets/masterclass/laser/slide-{n}.png', label: 'End the Nightmare of Node Cleanup' },
 };
+
+function slideSrc(deck, n) {
+  return DECKS[deck].path.replace('{n}', String(n).padStart(2, '0'));
+}
 
 function moveSlide(deck, dir) {
   const d = DECKS[deck];
   d.current = ((d.current - 1 + dir + d.total) % d.total) + 1;
-  const n = String(d.current).padStart(2, '0');
-  document.getElementById(deck + '-img').src = d.path.replace('{n}', n);
+  document.getElementById(deck + '-img').src = slideSrc(deck, d.current);
   document.getElementById(deck + '-counter').textContent = d.current + ' / ' + d.total;
 }
 
-// Keyboard navigation — arrow keys when focus is inside a deck
+// ── Modal ───────────────────────────────────────────────────────────────
+let modalDeck = null;
+
+function openModal(deck) {
+  modalDeck = deck;
+  const d = DECKS[deck];
+  const modal = document.getElementById('slide-modal');
+  document.getElementById('modal-img').src = slideSrc(deck, d.current);
+  document.getElementById('modal-title').textContent = d.label;
+  document.getElementById('modal-counter').textContent = d.current + ' / ' + d.total;
+  modal.hidden = false;
+  document.body.style.overflow = 'hidden';
+  modal.focus();
+}
+
+function closeModal() {
+  document.getElementById('slide-modal').hidden = true;
+  document.body.style.overflow = '';
+  modalDeck = null;
+}
+
+function modalMove(dir) {
+  if (!modalDeck) return;
+  const d = DECKS[modalDeck];
+  d.current = ((d.current - 1 + dir + d.total) % d.total) + 1;
+  document.getElementById('modal-img').src = slideSrc(modalDeck, d.current);
+  document.getElementById('modal-counter').textContent = d.current + ' / ' + d.total;
+  // Keep inline viewer in sync
+  document.getElementById(modalDeck + '-img').src = slideSrc(modalDeck, d.current);
+  document.getElementById(modalDeck + '-counter').textContent = d.current + ' / ' + d.total;
+}
+
 document.addEventListener('keydown', function(e) {
-  if (e.key === 'ArrowLeft')  { moveSlide('pour', -1); moveSlide('laser', -1); }
-  if (e.key === 'ArrowRight') { moveSlide('pour',  1); moveSlide('laser',  1); }
+  if (modalDeck) {
+    if (e.key === 'ArrowLeft')  modalMove(-1);
+    if (e.key === 'ArrowRight') modalMove(1);
+    if (e.key === 'Escape')     closeModal();
+  }
 });
 
 function selectPlatform(platform) {
