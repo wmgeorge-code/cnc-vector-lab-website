@@ -225,39 +225,37 @@
         <div class="coming-soon-overlay" aria-label="Coming Soon"><span class="coming-soon-stamp">Coming Soon</span></div>
       </div>
 
-      <div class="masterclass-grid">
+      <div class="slideshow-grid">
 
-        <div class="masterclass-card">
-          <img src="assets/masterclass/pour-title.png" alt="From Sketch to Flawless Pour — 5-Day Masterclass" class="masterclass-img" />
-          <div class="masterclass-body">
+        <!-- ── Deck 1: From Sketch to Flawless Pour ── -->
+        <div class="slideshow-deck">
+          <div class="slideshow-label">
             <span class="masterclass-tag">Resin &amp; Wood Inlay</span>
             <h3>From Sketch to Flawless Pour</h3>
-            <p>Bridge the gap between digital art and the wood shop. Start with any image — sketch, logo, or photo — and finish with a production-ready resin pour file in 5 days.</p>
-            <ol class="masterclass-days">
-              <li><strong>Day 1 — Taming the Vector Chaos</strong><br/>Drop in any image. CNC Vector Lab takes it from there — automated cleanup, no node wrestling.</li>
-              <li><strong>Day 2 — Digital Pigment Alchemy</strong><br/>Assign resin colors and wood species visually. Stop wondering what it might look like.</li>
-              <li><strong>Day 3 — Seeing the Future in 3D</strong><br/>Rotate the 3D mockup. Catch the mistakes before you cut the wood.</li>
-              <li><strong>Day 4 — The CAM Handshake</strong><br/>One-click export to VCarve, Carbide Create, or Fusion. Clean, tight, ready for tool paths.</li>
-              <li><strong>Day 5 — The Masterpiece Revealed</strong><br/>From raw scan to perfect pour. Your art. Your machine. Zero cloud required.</li>
-            </ol>
-            <a href="#contact" class="cta-button block">Request access</a>
+          </div>
+          <div class="slideshow-stage">
+            <img id="pour-img" src="assets/masterclass/pour/slide-01.png" alt="From Sketch to Flawless Pour — slide 1 of 13" class="slideshow-img" />
+          </div>
+          <div class="slideshow-controls">
+            <button class="slide-btn" onclick="moveSlide('pour',-1)" aria-label="Previous slide">&#8592;</button>
+            <span class="slide-counter" id="pour-counter">1 / 13</span>
+            <button class="slide-btn" onclick="moveSlide('pour', 1)" aria-label="Next slide">&#8594;</button>
           </div>
         </div>
 
-        <div class="masterclass-card">
-          <img src="assets/masterclass/laser-title.png" alt="Mastering Flawless Laser Vectors — 5-Day Masterclass" class="masterclass-img" />
-          <div class="masterclass-body">
+        <!-- ── Deck 2: Mastering Flawless Laser Vectors ── -->
+        <div class="slideshow-deck">
+          <div class="slideshow-label">
             <span class="masterclass-tag">Laser Cutting &amp; Engraving</span>
             <h3>End the Nightmare of Node Cleanup</h3>
-            <p>A 5-day masterclass in flawless laser vectors. Stop cleaning nodes by hand — assign CUT, ENGRAVE, and SCORE paths before you ever leave the app.</p>
-            <ol class="masterclass-days">
-              <li><strong>Day 1 — The Dirty Trace Solution</strong><br/>Drop in a scanned sketch or multicolor logo. Tighten the threshold for clean lines or ease it for softer curves.</li>
-              <li><strong>Day 2 — Layer Logic</strong><br/>Assign colors to CUT, ENGRAVE, or SCORE operations. No more guessing tool paths in LightBurn.</li>
-              <li><strong>Day 3 — Material Previews</strong><br/>Walnut inlay, frosted acrylic, stamped leather — visualize your material before cutting a single piece.</li>
-              <li><strong>Day 4 — One-Click Export</strong><br/>Clean SVG &amp; DXF files ready for LightBurn, Glowforge, VCarve, or Fusion. 100% local, no cloud.</li>
-              <li><strong>Day 5 — The Final Cut</strong><br/>Bridge digital art and the wood shop. From sketch to finished laser project.</li>
-            </ol>
-            <a href="#contact" class="cta-button block">Request access</a>
+          </div>
+          <div class="slideshow-stage">
+            <img id="laser-img" src="assets/masterclass/laser/slide-01.png" alt="Mastering Flawless Laser Vectors — slide 1 of 7" class="slideshow-img" />
+          </div>
+          <div class="slideshow-controls">
+            <button class="slide-btn" onclick="moveSlide('laser',-1)" aria-label="Previous slide">&#8592;</button>
+            <span class="slide-counter" id="laser-counter">1 / 7</span>
+            <button class="slide-btn" onclick="moveSlide('laser', 1)" aria-label="Next slide">&#8594;</button>
           </div>
         </div>
 
@@ -457,6 +455,26 @@
 
 <script>
 document.getElementById('year').textContent = new Date().getFullYear();
+
+// ── Slideshow ──────────────────────────────────────────────────────────
+const DECKS = {
+  pour:  { total: 13, current: 1, path: 'assets/masterclass/pour/slide-{n}.png' },
+  laser: { total:  7, current: 1, path: 'assets/masterclass/laser/slide-{n}.png' },
+};
+
+function moveSlide(deck, dir) {
+  const d = DECKS[deck];
+  d.current = ((d.current - 1 + dir + d.total) % d.total) + 1;
+  const n = String(d.current).padStart(2, '0');
+  document.getElementById(deck + '-img').src = d.path.replace('{n}', n);
+  document.getElementById(deck + '-counter').textContent = d.current + ' / ' + d.total;
+}
+
+// Keyboard navigation — arrow keys when focus is inside a deck
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'ArrowLeft')  { moveSlide('pour', -1); moveSlide('laser', -1); }
+  if (e.key === 'ArrowRight') { moveSlide('pour',  1); moveSlide('laser',  1); }
+});
 
 function selectPlatform(platform) {
   const macos   = document.getElementById('chk-macos');

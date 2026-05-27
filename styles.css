@@ -667,14 +667,14 @@ h1 {
   font-size: 15px;
 }
 
-/* ── Masterclasses ─────────────────────────────────────────────────── */
-.masterclass-grid {
+/* ── Masterclasses / Slideshow ─────────────────────────────────────── */
+.slideshow-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 2rem;
   margin-top: 2.5rem;
 }
-.masterclass-card {
+.slideshow-deck {
   background: var(--bg-card);
   border: 1px solid var(--line);
   border-radius: 12px;
@@ -682,17 +682,16 @@ h1 {
   display: flex;
   flex-direction: column;
 }
-.masterclass-img {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-.masterclass-body {
-  padding: 1.5rem;
+.slideshow-label {
+  padding: 1rem 1.25rem .75rem;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  flex: 1;
+  gap: .4rem;
+}
+.slideshow-label h3 {
+  font-size: 1.05rem;
+  color: var(--text);
+  margin: 0;
 }
 .masterclass-tag {
   display: inline-block;
@@ -707,36 +706,49 @@ h1 {
   padding: .2rem .55rem;
   width: fit-content;
 }
-.masterclass-card h3 {
-  font-size: 1.25rem;
-  color: var(--text);
-  margin: 0;
+.slideshow-stage {
+  background: #000;
+  line-height: 0;
 }
-.masterclass-card > .masterclass-body > p {
-  color: var(--text-muted);
-  font-size: .95rem;
-  margin: 0;
-}
-.masterclass-days {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: .75rem;
-  flex: 1;
-}
-.masterclass-days li {
-  font-size: .88rem;
-  color: var(--text-muted);
-  padding-left: 1.1rem;
-  border-left: 2px solid var(--accent);
-  line-height: 1.5;
-}
-.masterclass-days li strong {
-  color: var(--text);
+.slideshow-img {
+  width: 100%;
+  height: auto;
   display: block;
-  margin-bottom: .15rem;
+  transition: opacity .15s ease;
+}
+.slideshow-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: .75rem 1rem;
+  border-top: 1px solid var(--line);
+}
+.slide-btn {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  color: var(--text);
+  font-size: 1.1rem;
+  width: 2.2rem;
+  height: 2.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background .15s, border-color .15s;
+}
+.slide-btn:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #1c1a16;
+}
+.slide-counter {
+  font-size: .85rem;
+  color: var(--text-muted);
+  min-width: 3.5rem;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
 }
 /* Coming Soon stamp */
 .masterclass-header {
@@ -771,7 +783,7 @@ h1 {
 }
 
 @media (max-width: 800px) {
-  .masterclass-grid { grid-template-columns: 1fr; }
+  .slideshow-grid { grid-template-columns: 1fr; }
 }
 
 .contact-detail strong { color: var(--text); display: inline-block; min-width: 130px; }
