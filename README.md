@@ -33,8 +33,8 @@ Search-and-replace in `index.html`:
 |---|---|
 | `hello@cncvectorlab.com` | Your real contact email |
 | `support@cncvectorlab.com` | Your support email |
-| `href="#download"` download buttons | Real .dmg / .exe URLs (GitHub Releases, S3, etc.) |
-| `href="#buy"` pricing buttons | LemonSqueezy checkout URLs |
+| Download buttons | Current URLs point to public release assets in `wmgeorge-code/cnc-vector-lab-downloads`. |
+| Buy buttons | Current target is the subscription Worker `GET /checkout` route, which creates a Stripe Checkout Session. |
 | `href="https://github.com/"` | Your real GitHub repo URL |
 | `href="#">Privacy` / `Terms` / `EULA` | Real legal pages |
 | Form `onsubmit` handler | Formspree / Cloudflare Pages Forms / Basin endpoint |
@@ -60,13 +60,42 @@ Search-and-replace in `index.html`:
 ### S3 + CloudFront
 For if you want maximum control. ~$1–2/mo for a low-traffic site.
 
-## LemonSqueezy integration
+## Stripe Checkout integration
 
-In the pricing section, replace the `href="#buy"` links with your LS checkout URLs. LS gives you a hosted checkout per product variant.
+The public Buy buttons point to:
+
+```text
+https://cnc-vector-lab-subscriptions.wmgeorge54.workers.dev/checkout
+```
+
+That route lives in the subscription Worker and creates a Stripe Checkout Session using the Worker-side `STRIPE_SECRET_KEY` and `STRIPE_PRICE_ID`. Do not put Stripe secret keys in the website Worker.
+
+Before going live, confirm:
+
+1. The subscription Worker is deployed with the correct CNCVectorlab Stripe test/live secret.
+2. `STRIPE_PRICE_ID` is the current recurring price.
+3. `WEBSITE_BASE_URL` is `https://cncvectorlab.com`.
+4. The v0.2.0 macOS DMG and Windows installer are uploaded to the public `wmgeorge-code/cnc-vector-lab-downloads` release.
+
+## Installer downloads
+
+Cloudflare Workers static assets are limited to 25 MiB per asset, so the installer binaries cannot be deployed as normal website assets. The website links to public release assets in a downloads-only GitHub repository:
+
+```text
+https://github.com/wmgeorge-code/cnc-vector-lab-downloads/releases/download/v0.2.0/CNC-Vector-Lab-0.2.0-mac.dmg
+https://github.com/wmgeorge-code/cnc-vector-lab-downloads/releases/download/v0.2.0/CNC-Vector-Lab-0.2.0-Setup.exe
+```
+
+Upload/update the files with GitHub CLI:
+
+```bash
+gh release upload v0.2.0 /path/to/CNC-Vector-Lab-0.2.0-mac.dmg --repo wmgeorge-code/cnc-vector-lab-downloads --clobber
+gh release upload v0.2.0 /path/to/CNC-Vector-Lab-0.2.0-Setup.exe --repo wmgeorge-code/cnc-vector-lab-downloads --clobber
+```
 
 For the 14-day trial flow:
 1. Contact form captures "Trial code request" → forwards to your inbox
-2. You issue a trial license via LS dashboard → emails the tester a key
+2. You issue a trial license from the Admin Console → emails the tester a key
 3. Tester pastes key in app Settings → 14 days unlocked
 
 ## Image notes

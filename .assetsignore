@@ -1,8 +1,11 @@
 src/
 functions/
 node_modules/
+downloads/
+.git/
 .github/
 .wrangler/
+.DS_Store
 wrangler.jsonc
 .gitignore
 .assetsignore
