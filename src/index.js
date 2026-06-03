@@ -7,10 +7,15 @@ import { EmailMessage } from "cloudflare:email";
 
 const FROM = "contact@cncvectorlab.com";
 const TO   = "bill@wildwoodcarving.com";
+const TRIAL_REQUEST_URL = "https://cnc-vector-lab-subscriptions.wmgeorge54.workers.dev/trial/request";
 
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
+
+    if ((url.pathname === "/download" || url.pathname === "/downloads") && request.method === "GET") {
+      return Response.redirect(TRIAL_REQUEST_URL, 302);
+    }
 
     if (url.pathname === "/submit" && request.method === "POST") {
       return handleSubmit(request, env);

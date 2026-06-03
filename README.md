@@ -33,7 +33,7 @@ Search-and-replace in `index.html`:
 |---|---|
 | `hello@cncvectorlab.com` | Your real contact email |
 | `support@cncvectorlab.com` | Your support email |
-| Download buttons | Current URLs point to public release assets in `wmgeorge-code/cnc-vector-lab-downloads`. |
+| Download buttons | Point to the subscription Worker trial request flow, not direct installer assets. |
 | Buy buttons | Current target is the subscription Worker `GET /checkout` route, which creates a Stripe Checkout Session. |
 | `href="https://github.com/"` | Your real GitHub repo URL |
 | `href="#">Privacy` / `Terms` / `EULA` | Real legal pages |
@@ -75,28 +75,23 @@ Before going live, confirm:
 1. The subscription Worker is deployed with the correct CNCVectorlab Stripe test/live secret.
 2. `STRIPE_PRICE_ID` is the current recurring price.
 3. `WEBSITE_BASE_URL` is `https://cncvectorlab.com`.
-4. The v0.2.0 macOS DMG and Windows installer are uploaded to the public `wmgeorge-code/cnc-vector-lab-downloads` release.
+4. The v0.2.0 macOS DMG and Windows installer are configured as Worker-side installer URLs and only revealed after a trial or paid license is created.
 
 ## Installer downloads
 
-Cloudflare Workers static assets are limited to 25 MiB per asset, so the installer binaries cannot be deployed as normal website assets. The website links to public release assets in a downloads-only GitHub repository:
+Cloudflare Workers static assets are limited to 25 MiB per asset, so the installer binaries cannot be deployed as normal website assets. The website must not link directly to installer assets. Public download buttons route to:
 
 ```text
-https://github.com/wmgeorge-code/cnc-vector-lab-downloads/releases/download/v0.2.0/CNC-Vector-Lab-0.2.0-mac.dmg
-https://github.com/wmgeorge-code/cnc-vector-lab-downloads/releases/download/v0.2.0/CNC-Vector-Lab-0.2.0-Setup.exe
-```
-
-Upload/update the files with GitHub CLI:
-
-```bash
-gh release upload v0.2.0 /path/to/CNC-Vector-Lab-0.2.0-mac.dmg --repo wmgeorge-code/cnc-vector-lab-downloads --clobber
-gh release upload v0.2.0 /path/to/CNC-Vector-Lab-0.2.0-Setup.exe --repo wmgeorge-code/cnc-vector-lab-downloads --clobber
+https://cnc-vector-lab-subscriptions.wmgeorge54.workers.dev/trial/request
 ```
 
 For the 14-day trial flow:
-1. Contact form captures "Trial code request" → forwards to your inbox
-2. You issue a trial license from the Admin Console → emails the tester a key
-3. Tester pastes key in app Settings → 14 days unlocked
+1. User submits the Worker trial request form.
+2. D1 creates the user and trial license.
+3. The confirmation page shows the license key and installer links.
+4. User pastes key in app Settings → Account.
+
+For a stronger production gate, move installer binaries to private storage such as R2 and issue short-lived signed links after D1 license creation.
 
 ## Image notes
 
