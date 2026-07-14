@@ -65,7 +65,7 @@ For if you want maximum control. ~$1–2/mo for a low-traffic site.
 The public Buy buttons point to:
 
 ```text
-https://cnc-vector-lab-subscriptions.wmgeorge54.workers.dev/checkout
+https://api.cncvectorlab.com/checkout
 ```
 
 That route lives in the subscription Worker and creates a Stripe Checkout Session using the Worker-side `STRIPE_SECRET_KEY` and `STRIPE_PRICE_ID`. Do not put Stripe secret keys in the website Worker.
@@ -82,14 +82,15 @@ Before going live, confirm:
 Cloudflare Workers static assets are limited to 25 MiB per asset, so the installer binaries cannot be deployed as normal website assets. The website must not link directly to installer assets. Public download buttons route to:
 
 ```text
-https://cnc-vector-lab-subscriptions.wmgeorge54.workers.dev/trial/request
+https://api.cncvectorlab.com/trial/request
 ```
 
 For the 14-day trial flow:
 1. User submits the Worker trial request form.
-2. D1 creates the user and trial license.
-3. The confirmation page shows the license key and installer links.
-4. User pastes key in app Settings → Account.
+2. The Worker sends an email verification link.
+3. After verification, D1 creates or reuses the user and trial license.
+4. The confirmation page shows the license key and installer links.
+5. User pastes key in app Settings → Account.
 
 For a stronger production gate, move installer binaries to private storage such as R2 and issue short-lived signed links after D1 license creation.
 

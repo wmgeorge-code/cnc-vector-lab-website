@@ -7,7 +7,7 @@ import { EmailMessage } from "cloudflare:email";
 
 const FROM = "contact@cncvectorlab.com";
 const TO   = "bill@wildwoodcarving.com";
-const TRIAL_REQUEST_URL = "https://cnc-vector-lab-subscriptions.wmgeorge54.workers.dev/trial/request";
+const TRIAL_REQUEST_URL = "https://api.cncvectorlab.com/trial/request";
 
 export default {
   async fetch(request, env) {
