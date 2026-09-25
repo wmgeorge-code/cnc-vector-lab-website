@@ -25,40 +25,17 @@ open http://localhost:8080
 
 Or just double-click `index.html` — relative paths work from the filesystem too.
 
-## Before going live — placeholders to fill in
+## Production deployment
 
-Search-and-replace in `index.html`:
+The existing Cloudflare Worker `cnc-vector-lab-website` serves `cncvectorlab.com`.
+`wrangler.jsonc` defines the static assets, `src/index.js` routes download/contact
+requests, and the `EMAIL` binding handles the contact form. Keep its existing
+custom domain and binding when deploying. This is a Workers deployment, not Pages.
 
-| Placeholder | Replace with |
-|---|---|
-| `hello@cncvectorlab.com` | Your real contact email |
-| `support@cncvectorlab.com` | Your support email |
-| Download buttons | Point to the subscription Worker trial request flow, not direct installer assets. |
-| Buy buttons | Current target is the subscription Worker `GET /checkout` route, which creates a Stripe Checkout Session. |
-| `href="https://github.com/"` | Your real GitHub repo URL |
-| `href="#">Privacy` / `Terms` / `EULA` | Real legal pages |
-| Form `onsubmit` handler | Formspree / Cloudflare Pages Forms / Basin endpoint |
-
-## Deploy options
-
-### Cloudflare Pages (recommended)
-1. Push the `website/` folder to a Git repo
-2. Connect to Cloudflare Pages, set the build directory to `website/`, no build command
-3. Free tier covers everything you need; custom domain is free
-4. Forms: enable Cloudflare Pages Functions or use a Forms endpoint
-
-### GitHub Pages
-1. Push the `website/` folder to a `gh-pages` branch (or `/docs` on main)
-2. Repo settings → Pages → source = that branch
-3. Custom domain via the Pages settings + a CNAME file
-4. Forms: needs an external endpoint (Formspree, Basin, etc.)
-
-### Netlify
-1. Drag the `website/` folder onto Netlify
-2. Done. Forms are built-in (`netlify` attribute on the form).
-
-### S3 + CloudFront
-For if you want maximum control. ~$1–2/mo for a low-traffic site.
+Use the project's pinned Wrangler and authenticated Cloudflare account. Preview
+with `wrangler dev`; inspect `wrangler deploy --dry-run` before deploying with
+`wrangler deploy --keep-vars`. The GitHub workflow deploys changes merged to main.
+`.assetsignore` excludes source/config, credentials, caches and installer binaries.
 
 ## Stripe Checkout integration
 
@@ -75,7 +52,7 @@ Before going live, confirm:
 1. The subscription Worker is deployed with the correct CNCVectorlab Stripe test/live secret.
 2. `STRIPE_PRICE_ID` is the current recurring price.
 3. `WEBSITE_BASE_URL` is `https://cncvectorlab.com`.
-4. The v0.2.0 macOS DMG and Windows installer are configured as Worker-side installer URLs and only revealed after a trial or paid license is created.
+4. The subscription Worker selects the intended installer channel and shows private links after verified trial issuance or purchase.
 
 ## Installer downloads
 
@@ -92,7 +69,26 @@ For the 14-day trial flow:
 4. The confirmation page shows the license key and installer links.
 5. User pastes key in app Settings → Account.
 
-For a stronger production gate, move installer binaries to private storage such as R2 and issue short-lived signed links after D1 license creation.
+Installers already live in private R2 storage and are streamed using expiring,
+platform-specific signed links. Active license holders can renew download links at
+`https://api.cncvectorlab.com/account`.
+
+### External trial — September 25, 2026
+
+Version **1.1.1** uses Electron. The owner authorized unsigned outside trials while
+signing credentials are unavailable. Supported downloads are **Apple Silicon Mac
+DMG** and **Windows x64 EXE**. The website and download pages explicitly identify
+them as unsigned, explain OS approval and preserve normal license activation.
+No separate Python/Node installation is needed. Trial updates are manual.
+
+The subscription Worker setting `TRIAL_RELEASE_VERSION=1.1.1` selects the separate
+`trials/v1.1.1/` channel. `/trial/release` exposes validated metadata. Signed stable
+publishing and automatic update gates remain in place. The app repository's
+`docs/external-trial-release.md` retains the exact CI build and installer hashes.
+
+If trial downloads are disabled or superseded, update the version/platform/caveat
+copy in `index.html` and coordinate the Worker configuration. Do not put installer
+binaries, license keys or account tokens in this website repository.
 
 ## Image notes
 
