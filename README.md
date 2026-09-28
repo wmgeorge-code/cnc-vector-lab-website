@@ -73,16 +73,17 @@ Installers already live in private R2 storage and are streamed using expiring,
 platform-specific signed links. Active license holders can renew download links at
 `https://api.cncvectorlab.com/account`.
 
-### External trial — September 25, 2026
+### External trial — September 28, 2026
 
-Version **1.1.1** uses Electron. The owner authorized unsigned outside trials while
+Version **1.1.2** uses Electron and preserves deleted backgrounds and edited vectors
+when reopening projects. The owner authorized unsigned outside trials while
 signing credentials are unavailable. Supported downloads are **Apple Silicon Mac
 DMG** and **Windows x64 EXE**. The website and download pages explicitly identify
 them as unsigned, explain OS approval and preserve normal license activation.
 No separate Python/Node installation is needed. Trial updates are manual.
 
-The subscription Worker setting `TRIAL_RELEASE_VERSION=1.1.1` selects the separate
-`trials/v1.1.1/` channel. `/trial/release` exposes validated metadata. Signed stable
+The subscription Worker setting `TRIAL_RELEASE_VERSION=1.1.2` selects the separate
+`trials/v1.1.2/` channel. `/trial/release` exposes validated metadata. Signed stable
 publishing and automatic update gates remain in place. The app repository's
 `docs/external-trial-release.md` retains the exact CI build and installer hashes.
 
