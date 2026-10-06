@@ -73,18 +73,19 @@ Installers already live in private R2 storage and are streamed using expiring,
 platform-specific signed links. Active license holders can renew download links at
 `https://api.cncvectorlab.com/account`.
 
-### External trial — September 30, 2026
+### External trial — October 6, 2026
 
-Version **1.1.3** adds visible saved-project deletion with confirmation and pending-save
-protection. It also preserves deleted backgrounds and edited vectors when reopening
-projects. The owner authorized unsigned outside trials while
+Version **1.1.4** reduces idle preview rendering and repeated selection/assignment
+work. New/Open dialogs retain the current workspace, form values and keyboard
+focus, and protect pending actions from repeated submissions and stale lists.
+Saved-project deletion and vector-edit persistence remain included. The owner authorized unsigned outside trials while
 signing credentials are unavailable. Supported downloads are **Apple Silicon Mac
 DMG** and **Windows x64 EXE**. The website and download pages explicitly identify
 them as unsigned, explain OS approval and preserve normal license activation.
 No separate Python/Node installation is needed. Trial updates are manual.
 
-The subscription Worker setting `TRIAL_RELEASE_VERSION=1.1.3` selects the separate
-`trials/v1.1.3/` channel; 1.1.2 remains stored for rollback and existing links.
+The subscription Worker setting `TRIAL_RELEASE_VERSION=1.1.4` selects the separate
+`trials/v1.1.4/` channel; 1.1.3 remains stored for rollback and existing links.
 `/trial/release` exposes validated metadata. Signed stable
 publishing and automatic update gates remain in place. The app repository's
 `docs/external-trial-release.md` retains the exact CI build and installer hashes.
